@@ -200,7 +200,7 @@ class Controller:
                         if self.pic != "":
                             file_input = sessionDialog.find_element(By.CSS_SELECTOR, "input[type='file']")
                             file_input.send_keys(self.pic)
-
+                        self.driver.get("https://channels.weixin.qq.com/platform/private_msg")
                         self.driver.navigate().refresh()
                         continue
 
@@ -221,7 +221,7 @@ class Controller:
                         if self.pic != "":
                             file_input = sessionDialog.find_element(By.CSS_SELECTOR, "input[type='file']")
                             file_input.send_keys(self.pic)
-
+                        self.driver.get("https://channels.weixin.qq.com/platform/private_msg")
                         self.driver.navigate().refresh()
                         continue
                 except:
