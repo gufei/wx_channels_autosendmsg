@@ -201,6 +201,9 @@ class Controller:
                             file_input = sessionDialog.find_element(By.CSS_SELECTOR, "input[type='file']")
                             file_input.send_keys(self.pic)
 
+                        self.driver.navigate().refresh()
+                        continue
+
                 except:
                     continue
 
@@ -219,6 +222,8 @@ class Controller:
                             file_input = sessionDialog.find_element(By.CSS_SELECTOR, "input[type='file']")
                             file_input.send_keys(self.pic)
 
+                        self.driver.navigate().refresh()
+                        continue
                 except:
                     continue
 
