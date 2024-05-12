@@ -201,7 +201,22 @@ class Controller:
                             file_input = sessionDialog.find_element(By.CSS_SELECTOR, "input[type='file']")
                             file_input.send_keys(self.pic)
                         self.driver.get("https://channels.weixin.qq.com/platform/private_msg")
-                        self.driver.navigate().refresh()
+                        # 定位当前页必须是私信管理页
+                        while True:
+                            print("Waiting for the page to load")
+                            if not self.status:
+                                return
+                            try:
+                                routeName = self.driver.find_element(By.CLASS_NAME, "route-name")
+                            except:
+                                continue
+
+                            if routeName.is_displayed() and routeName.text == "私信管理":
+                                break
+
+                        mainBody = self.driver.find_element(By.CLASS_NAME, "main-body")
+                        sx = mainBody.find_element(By.PARTIAL_LINK_TEXT, "私信")
+                        dzhxx = mainBody.find_element(By.PARTIAL_LINK_TEXT, "打招呼消息")
                         continue
 
                 except:
@@ -222,7 +237,22 @@ class Controller:
                             file_input = sessionDialog.find_element(By.CSS_SELECTOR, "input[type='file']")
                             file_input.send_keys(self.pic)
                         self.driver.get("https://channels.weixin.qq.com/platform/private_msg")
-                        self.driver.navigate().refresh()
+                        # 定位当前页必须是私信管理页
+                        while True:
+                            print("Waiting for the page to load")
+                            if not self.status:
+                                return
+                            try:
+                                routeName = self.driver.find_element(By.CLASS_NAME, "route-name")
+                            except:
+                                continue
+
+                            if routeName.is_displayed() and routeName.text == "私信管理":
+                                break
+
+                        mainBody = self.driver.find_element(By.CLASS_NAME, "main-body")
+                        sx = mainBody.find_element(By.PARTIAL_LINK_TEXT, "私信")
+                        dzhxx = mainBody.find_element(By.PARTIAL_LINK_TEXT, "打招呼消息")
                         continue
                 except:
                     continue
