@@ -18,12 +18,13 @@ class WinGUI(Tk):
         self.tk_input_pic = self.__tk_input_pic(self)
         self.tk_button_start_button = self.__tk_button_start_button(self)
         self.tk_button_stop_button = self.__tk_button_stop_button(self)
+        self.tk_button_select = self.__tk_button_select(self)
 
     def __win(self):
         self.title("视频号私信")
         # 设置窗口大小、居中
-        width = 264
-        height = 196
+        width = 360
+        height = 200
         screenwidth = self.winfo_screenwidth()
         screenheight = self.winfo_screenheight()
         geometry = '%dx%d+%d+%d' % (width, height, (screenwidth - width) / 2, (screenheight - height) / 2)
@@ -100,6 +101,10 @@ class WinGUI(Tk):
         btn.place(x=115, y=140, width=80, height=30)
         return btn
 
+    def __tk_button_select(self,parent):
+        btn = Button(parent, text="选择文件", takefocus=False,)
+        btn.place(x=250, y=81, width=100, height=30)
+        return btn
 
 class Win(WinGUI):
     def __init__(self, controller):
@@ -112,6 +117,7 @@ class Win(WinGUI):
     def __event_bind(self):
         self.tk_button_start_button.bind('<Button-1>', self.ctl.start)
         self.tk_button_stop_button.bind('<Button-1>', self.ctl.stop)
+        self.tk_button_select.bind('<Button-1>', self.ctl.selectFile)
         self.protocol('WM_DELETE_WINDOW', self.ctl.quit)
         pass
 
@@ -153,6 +159,12 @@ class Controller:
     def start(self, event):
         self.status = True
         self.thread_it(self.exec)
+
+    def selectFile(self, event):
+        from tkinter import filedialog
+        self.win.tk_input_pic.delete(0, END)
+        self.pic = filedialog.askopenfilename()
+        self.win.tk_input_pic.insert(0, self.pic)
 
     def sendmsg(self):
         try:
