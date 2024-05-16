@@ -187,75 +187,82 @@ class Controller:
             if not self.status:
                 return
             dzhxx.click()
-            scrollList = mainBody.find_element(By.CLASS_NAME, "scroll-list__wrp")
-            sessionWraps = scrollList.find_elements(By.CLASS_NAME, "session-wrap")
-            for session in sessionWraps:
-                try:
-                    if session.find_element(By.CLASS_NAME, "dot").is_displayed():
-                        session.click()
+            try:
+                scrollList = mainBody.find_element(By.CLASS_NAME, "scroll-list__wrp")
+                sessionWraps = scrollList.find_elements(By.CLASS_NAME, "session-wrap")
+                for session in sessionWraps:
+                    try:
+                        if session.find_element(By.CLASS_NAME, "dot").is_displayed():
+                            session.click()
 
-                        sessionDialog = mainBody.find_element(By.CLASS_NAME, "session-dialog")
-                        sessionDialog.find_element(By.CLASS_NAME, "edit_area").send_keys(self.content)
-                        sessionDialog.find_element(By.CLASS_NAME, "weui-desktop-btn_default").click()
-                        if self.pic != "":
-                            file_input = sessionDialog.find_element(By.CSS_SELECTOR, "input[type='file']")
-                            file_input.send_keys(self.pic)
-                        self.driver.get("https://channels.weixin.qq.com/platform/private_msg")
-                        # 定位当前页必须是私信管理页
-                        while True:
-                            print("Waiting for the page to load")
-                            if not self.status:
-                                return
-                            try:
-                                routeName = self.driver.find_element(By.CLASS_NAME, "route-name")
-                            except:
-                                continue
+                            sessionDialog = mainBody.find_element(By.CLASS_NAME, "session-dialog")
+                            sessionDialog.find_element(By.CLASS_NAME, "edit_area").send_keys(self.content)
+                            sessionDialog.find_element(By.CLASS_NAME, "weui-desktop-btn_default").click()
+                            if self.pic != "":
+                                file_input = sessionDialog.find_element(By.CSS_SELECTOR, "input[type='file']")
+                                file_input.send_keys(self.pic)
+                            self.driver.get("https://channels.weixin.qq.com/platform/private_msg")
+                            # 定位当前页必须是私信管理页
+                            while True:
+                                print("Waiting for the page to load")
+                                if not self.status:
+                                    return
+                                try:
+                                    routeName = self.driver.find_element(By.CLASS_NAME, "route-name")
+                                except:
+                                    continue
 
-                            if routeName.is_displayed() and routeName.text == "私信管理":
-                                break
+                                if routeName.is_displayed() and routeName.text == "私信管理":
+                                    break
 
-                        mainBody = self.driver.find_element(By.CLASS_NAME, "main-body")
-                        sx = mainBody.find_element(By.PARTIAL_LINK_TEXT, "私信")
-                        dzhxx = mainBody.find_element(By.PARTIAL_LINK_TEXT, "打招呼消息")
+                            mainBody = self.driver.find_element(By.CLASS_NAME, "main-body")
+                            sx = mainBody.find_element(By.PARTIAL_LINK_TEXT, "私信")
+                            dzhxx = mainBody.find_element(By.PARTIAL_LINK_TEXT, "打招呼消息")
+                            continue
+
+                    except:
                         continue
+            except:
+                pass
 
-                except:
-                    continue
+            try:
+                sx.click()
+                scrollList = mainBody.find_element(By.CLASS_NAME, "scroll-list__wrp")
+                sessionWraps = scrollList.find_elements(By.CLASS_NAME, "session-wrap")
+                for session in sessionWraps:
+                    try:
+                        if session.find_element(By.CLASS_NAME, "dot").is_displayed():
+                            session.click()
 
-            sx.click()
-            scrollList = mainBody.find_element(By.CLASS_NAME, "scroll-list__wrp")
-            sessionWraps = scrollList.find_elements(By.CLASS_NAME, "session-wrap")
-            for session in sessionWraps:
-                try:
-                    if session.find_element(By.CLASS_NAME, "dot").is_displayed():
-                        session.click()
+                            sessionDialog = mainBody.find_element(By.CLASS_NAME, "session-dialog")
+                            sessionDialog.find_element(By.CLASS_NAME, "edit_area").send_keys(self.content)
+                            sessionDialog.find_element(By.CLASS_NAME, "weui-desktop-btn_default").click()
+                            if self.pic != "":
+                                file_input = sessionDialog.find_element(By.CSS_SELECTOR, "input[type='file']")
+                                file_input.send_keys(self.pic)
+                            self.driver.get("https://channels.weixin.qq.com/platform/private_msg")
 
-                        sessionDialog = mainBody.find_element(By.CLASS_NAME, "session-dialog")
-                        sessionDialog.find_element(By.CLASS_NAME, "edit_area").send_keys(self.content)
-                        sessionDialog.find_element(By.CLASS_NAME, "weui-desktop-btn_default").click()
-                        if self.pic != "":
-                            file_input = sessionDialog.find_element(By.CSS_SELECTOR, "input[type='file']")
-                            file_input.send_keys(self.pic)
-                        self.driver.get("https://channels.weixin.qq.com/platform/private_msg")
-                        # 定位当前页必须是私信管理页
-                        while True:
-                            print("Waiting for the page to load")
-                            if not self.status:
-                                return
-                            try:
-                                routeName = self.driver.find_element(By.CLASS_NAME, "route-name")
-                            except:
-                                continue
+                            # 定位当前页必须是私信管理页
+                            while True:
+                                print("Waiting for the page to load")
+                                if not self.status:
+                                    return
+                                try:
+                                    routeName = self.driver.find_element(By.CLASS_NAME, "route-name")
+                                except:
+                                    continue
 
-                            if routeName.is_displayed() and routeName.text == "私信管理":
-                                break
+                                if routeName.is_displayed() and routeName.text == "私信管理":
+                                    break
 
-                        mainBody = self.driver.find_element(By.CLASS_NAME, "main-body")
-                        sx = mainBody.find_element(By.PARTIAL_LINK_TEXT, "私信")
-                        dzhxx = mainBody.find_element(By.PARTIAL_LINK_TEXT, "打招呼消息")
+                            mainBody = self.driver.find_element(By.CLASS_NAME, "main-body")
+                            sx = mainBody.find_element(By.PARTIAL_LINK_TEXT, "私信")
+                            dzhxx = mainBody.find_element(By.PARTIAL_LINK_TEXT, "打招呼消息")
+                            continue
+                    except:
                         continue
-                except:
-                    continue
+            except:
+                pass
 
     def stop(self, event):
         self.status = False
